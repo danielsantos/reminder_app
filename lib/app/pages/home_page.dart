@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
       _descriptionController.text = reminderParam.description;
       _dateTimeController.text = reminderParam.dateTime;
     }
-
   }
 
   void initializing() async {
@@ -48,7 +47,6 @@ class _HomePageState extends State<HomePage> {
     var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
     var ios = new IOSInitializationSettings();
     var initSettings = new InitializationSettings(android, ios);
-    //await flutterLocalNotificationsPlugin.initialize(initSettings, onSelectNotification: onSelectNotification);
     await flutterLocalNotificationsPlugin.initialize(initSettings);
   }
 
@@ -85,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => RemindersList(),
                 ));
-                //Navigator.pop(context);
               },
             ),
           ],
@@ -148,7 +145,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 48.0, right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, top: 68.0, right: 8.0),
               child: SizedBox(
                 width: double.maxFinite,
                 child: RaisedButton(
@@ -184,8 +181,6 @@ class _HomePageState extends State<HomePage> {
                             _descriptionController.text,
                             _dateTimeController.text);
 
-                        print(reminderParam);
-
                         if (reminderParam.id == 0) {
                           Future<int> resultOfSave = _dao.save(reminder);
 
@@ -199,24 +194,23 @@ class _HomePageState extends State<HomePage> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.CENTER,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.green,
+                              backgroundColor: Colors.green[300],
                               textColor: Colors.white,
                               fontSize: 16.0);
                         } else {
-
-                          /*Future<int> resultOfSave =*/ _dao.update(new Reminder(
+                          _dao.update(new Reminder(
                               reminderParam.id,
                               _descriptionController.text,
                               _dateTimeController.text));
 
-                          flutterLocalNotificationsPlugin.cancel(reminderParam.id);
+                          flutterLocalNotificationsPlugin
+                              .cancel(reminderParam.id);
                           showNotification(reminderParam.id);
 
                           print('vamos atualizar!');
 
                           clearFields();
 
-                          //REFACT
                           Fluttertoast.showToast(
                               msg: "Lembrete atualizado com sucesso!",
                               toastLength: Toast.LENGTH_SHORT,
@@ -228,7 +222,6 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         reminderParam = new Reminder(0, '', '');
-
                       }
                     }
                   },

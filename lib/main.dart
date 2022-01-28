@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:melembra/app/app_widget.dart';
 
 void main() {
-  Admob.initialize(getAppId());
+  List<String> ids = [];
+  ids.add(getAppId());
+
+  Admob.initialize(testDeviceIds: ids);
   runApp(AppWidget());
 }
 
 String getAppId() {
-    return 'ca-app-pub-3992962658517532/8458488721';
+  return 'ca-app-pub-3992962658517532/8458488721';
 }
