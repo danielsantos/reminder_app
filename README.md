@@ -1,6 +1,6 @@
 # Reminder Me
 
-### A mobile app developed in Flutter where you save reminders by simple way.
+### :bulb: A mobile app developed in Flutter where you save reminders by simple way.
 
 Downloaded over a hundred times.
 
